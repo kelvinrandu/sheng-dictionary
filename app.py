@@ -33,17 +33,26 @@ def word_meaning(word):
         
         # asking users if they mean any other word form the list of similar_words_list
         ans = input("Did you mean %s instead? Enter 'Y' If yes or 'N' if No " % similar_words_list)
-        
+      
+
         if ans.lower() == 'y':
             # asking user to select the word
-            index = input("Enter the position number of word to select the word. Ex 1 or 2 or 3 : ")
-            return word_meaning(get_close_matches(word, words_data.keys())[int(index)-1])
+            if len(similar_words_list)>1:
+
+                index = input("Enter the position number of word to select the word. Ex 1 or 2 or 3 : ")
+                return word_meaning(get_close_matches(word, words_data.keys())[int(index)-1])
+            elif len(similar_words_list)==1:
+                # index = input("Enter the position number of word to select the word. Ex 1 or 2 or 3 : ")
+                return word_meaning(get_close_matches(word, words_data.keys())[0])
+            else:
+                print("Word Doesnt exists in our database. Update our database with words instruction coming later!!!")
+
         elif ans.lower() == 'n':
-            print("Word Doesnt exists. Please double check it!!!")
+            print(" sheng Word Doesnt exists. update needed!!!")
         else:
             print("Sorry, We don't understand you!!!!")
     else:
-        print("Word Doesnt exists. Please double check it!!!")
+        print("Word Doesnt exists in our database. Update our database with words instruction coming later!!!")
 
 print(word_meaning(word))
 
